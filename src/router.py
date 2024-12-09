@@ -1,12 +1,12 @@
 class Router:
     def __init__(self, name):
         self.name = name
-        #self.neighbors = {}
+        self.neighbors = {}
         self.distance_vector = {}
 
-    #def add_neighbor(self, neighbor, cost):
-    #    self.neighbors[neighbor] = cost
-     #   self.distance_vector[neighbor] = cost
+    def addNeighbor(self, neighbor, cost):
+        self.neighbors[neighbor] = cost
+        #self.distance_vector[neighbor] = cost
 
     #def update_distance_vector(self, neighbor, neighbor_distance_vector):
     #    updated = False
@@ -17,5 +17,7 @@ class Router:
     #    return updated
 
     def __str__(self):
-        return f"Router {self.name}: {self.distance_vector}"
+        return f"Router {self.name}: {self.distance_vector} neighbors: {self.neighbors}"
+
+
 
