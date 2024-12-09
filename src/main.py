@@ -1,5 +1,4 @@
 from router import Router
-from edge import Edge
 import random
 
 routers = [] #array of all routers
