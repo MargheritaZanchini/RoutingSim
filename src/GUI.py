@@ -1,10 +1,14 @@
 import tkinter as tk
 import math
 
+
+
 class GUI:
     # Funzione per creare la finestra
     def __init__(self, routers):
-        self.router = routers
+        self.routers = routers
+        self.number_of_steps = 0
+        self.update = True
         window = tk.Tk()
         window.title("Routing Table Viewer")
 
@@ -45,19 +49,39 @@ class GUI:
         canvas.tag_raise("routerText")
 
 
-        textArea = tk.Text(window, height=20, width=50)
-        textArea.grid(row=0, column=1, padx=10, pady=10)
-        textArea.insert(tk.END, "Routing Table\n")
-        
-        # write the routing table of each router
-        for router in routers:
-            textArea.insert(tk.END, f"Router {router.name}\n")
-            textArea.insert(tk.END, "Destination\t\tCost\t\tNext Hop\n")
-            for dest, cost in router.my_table.table.items():
-                textArea.insert(tk.END, f"{dest}\t\t{cost[0]}\t\t{cost[1]}\n")
-            textArea.insert(tk.END, "\n")
-        textArea.config(state=tk.DISABLED)
+        self.textArea = tk.Text(window, height=20, width=50)
+        self.textArea.grid(row=0, column=1, padx=10, pady=10)
+        self.print_routing_tables()
+
+        self.button_next = tk.Button(window, text="Next Step (Click Here)", command=self.distance_vector_routing)
+        self.button_next.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
         
 
         # starts the GUI
         window.mainloop()
+
+    def distance_vector_routing(self):
+        self.number_of_steps += 1
+        #every roueter updates his DV
+        self.update = False
+        for router in self.routers:
+            if(router.update_distance_vector()): 
+                self.update = True #update is true if at least one DV changed
+        self.print_routing_tables()
+        if(not self.update):
+           self.button_next.config(state=tk.DISABLED)
+
+    def print_routing_tables(self):
+        self.textArea.config(state=tk.NORMAL)
+        self.textArea.delete('1.0', tk.END)
+        self.textArea.insert(tk.END, f"Routing Table at step {self.number_of_steps} \n\n")
+        if(not self.update):
+            self.textArea.insert(tk.END, "These are the optimal routing tables\nfor this network: \n\n")
+        # write the routing table of each router
+        for router in self.routers:
+            self.textArea.insert(tk.END, f"Router {router.name}\n")
+            self.textArea.insert(tk.END, "Destination\t\tCost\t\tNext Hop\n")
+            for dest, cost in router.my_table.table.items():
+                self.textArea.insert(tk.END, f"{dest}\t\t{cost[0]}\t\t{cost[1]}\n")
+            self.textArea.insert(tk.END, "\n")
+        self.textArea.config(state=tk.DISABLED)
