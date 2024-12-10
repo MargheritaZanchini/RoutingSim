@@ -6,6 +6,7 @@ class Router:
         self.distance_vector = {}
         self.my_table = RoutingTable()
         self.my_table.add_route(self.name, 0, self.name)
+        self.position = (0, 0)
 
     #addition of a neighbor to the router
     def add_neighbor(self, neighbor, cost):
@@ -38,6 +39,8 @@ class Router:
 
         return f"Router {self.name}: {self.distance_vector} neighbors: {str} \nrouting table: {self.my_table.table}\n"
 
+    def set_position(self, x, y):
+        self.position = (x, y)
 
 
 

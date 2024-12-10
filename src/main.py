@@ -1,11 +1,13 @@
 from router import Router
+from GUI import GUI
 import random
 
 routers = [] #array of all routers
+#n_routers = random.randint(3, 8) #random number of routers between 3 and 10
 
 #function to create a random network
 def create_random_network():
-    n_routers = random.randint(3, 10) #random number of routers between 3 and 10
+    n_routers = random.randint(3, 8) #random number of routers between 3 and 10
     print(f"Random number of routers: {n_routers}")
 
     for i in range(n_routers):
@@ -117,3 +119,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    app = GUI(routers)
