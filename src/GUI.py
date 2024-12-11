@@ -1,15 +1,11 @@
 import tkinter as tk
 import math
-
-
-
 class GUI:
-    # Funzione per creare la finestra
     def __init__(self, routers):
         self.routers = routers
         self.number_of_steps = 0
         self.update = True
-        window = tk.Tk()
+        window = tk.Tk() #creates the window
         window.title("Routing Table Viewer")
 
         # Canvas for the network
@@ -49,10 +45,12 @@ class GUI:
         canvas.tag_raise("routerText")
 
 
+        # Text Area for the routing tables
         self.textArea = tk.Text(window, height=20, width=50)
         self.textArea.grid(row=0, column=1, padx=10, pady=10)
         self.print_routing_tables()
 
+        # Button to go to the next step
         self.button_next = tk.Button(window, text="Next Step (Click Here)", command=self.distance_vector_routing)
         self.button_next.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
         
@@ -60,6 +58,7 @@ class GUI:
         # starts the GUI
         window.mainloop()
 
+    #function called when the button is clicked, it updates the distance vector of all routers
     def distance_vector_routing(self):
         self.number_of_steps += 1
         #every roueter updates his DV
@@ -71,6 +70,7 @@ class GUI:
         if(not self.update):
            self.button_next.config(state=tk.DISABLED)
 
+    #function to print the routing tables of all routers
     def print_routing_tables(self):
         self.textArea.config(state=tk.NORMAL)
         self.textArea.delete('1.0', tk.END)

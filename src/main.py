@@ -2,10 +2,8 @@ from router import Router
 from network import Network
 from GUI import GUI
 
-#routers = [] # array of all routers
-
 def main():
-    global routers  # dichiarazione della variabile globale
+    global routers  #array of all routers
     network = Network()
 
     # comment the second line and uncomment the first line to create a random network

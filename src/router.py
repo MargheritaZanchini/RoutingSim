@@ -2,11 +2,10 @@ from routing_table import RoutingTable
 class Router:
     def __init__(self, name):
         self.name = name
-        self.neighbors = {}
-        self.distance_vector = {}
-        self.my_table = RoutingTable()
-        self.my_table.add_route(self.name, 0, self.name)
-        self.position = (0, 0)
+        self.neighbors = {} #dictionary of neighbors with the cost of the connection
+        self.my_table = RoutingTable() #routing table of the router
+        self.my_table.add_route(self.name, 0, self.name) #add the router to its own routing table
+        self.position = (0, 0) #position of the router in the GUI
 
     #addition of a neighbor to the router
     def add_neighbor(self, neighbor, cost):
@@ -28,19 +27,20 @@ class Router:
                     update = True    
         return update
 
+    #return the distance vector of the router, so the neighbors can see it
     def get_distance_vector(self):
         return self.my_table.table
     
+    #set the position of the router in the GUI
+    def set_position(self, x, y):
+        self.position = (x, y)
 
     def __str__(self):
         str = ""
         for router in self.neighbors:
             str = ""+ str + " { " + router.name + f" -> {self.neighbors[router]} " + " } "
 
-        return f"Router {self.name}: {self.distance_vector} neighbors: {str} \nrouting table: {self.my_table.table}\n"
-
-    def set_position(self, x, y):
-        self.position = (x, y)
+        return f"Router {self.name}: neighbors: {str} \nrouting table: {self.my_table.table}\n"
 
 
 
