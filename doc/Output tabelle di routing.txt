@@ -1,0 +1,65 @@
+Router A
+
+Destination	Cost		Next Hop
+A		0		A
+B		1		B
+C		7		B
+D		4		B
+E		6		B
+F		16		B
+
+
+Router B
+
+Destination	Cost		Next Hop
+B		0		B
+A		1		A
+C		6		D
+D		3		D
+E		5		D
+F		15		D
+
+
+Router C
+
+Destination	Cost		Next Hop
+C		0		C
+A		7		E
+B		6		E
+E		1		E
+F		9		F
+D		3		E
+
+
+Router D
+
+Destination	Cost		Next Hop
+D		0		D
+B		3		B
+E		2		E
+A		4		B
+C		3		E
+F		12		E
+
+
+Router E
+
+Destination	Cost		Next Hop
+E		0		E
+C		1		C
+D		2		D
+A		6		D
+B		5		D
+F		10		C
+
+
+Router F
+
+Destination	Cost		Next Hop
+F		0		F
+C		9		C
+A		16		C
+B		15		C
+E		10		C
+D		12		C
+
